@@ -1,6 +1,7 @@
 {
   "name": "@tijs/actor-typeahead",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "description": "Typeahead Web Component for AT Protocol (Bluesky) actor handles",
   "exports": {
     ".": "./mod.ts"
   },

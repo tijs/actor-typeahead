@@ -103,14 +103,37 @@ function clone<T extends Node>(tmpl: T): T {
   return tmpl.cloneNode(true) as T;
 }
 
-interface Actor {
+/** An actor returned from the Bluesky typeahead API. */
+export interface Actor {
+  /** The actor's handle (e.g. "alice.bsky.social"). */
   handle: string;
+  /** URL to the actor's avatar image. */
   avatar?: string;
 }
 
+/**
+ * A Web Component that provides typeahead suggestions for AT Protocol handles.
+ *
+ * Wraps a slotted `<input>` element and displays a dropdown of matching actors
+ * fetched from Bluesky's `app.bsky.actor.searchActorsTypeahead` API.
+ * Supports keyboard navigation, pointer/click selection, and dispatches native
+ * `input` events so frameworks like React can detect value changes.
+ *
+ * Themeable via CSS custom properties: `--color-background`, `--color-border`,
+ * `--color-hover`, `--color-avatar-fallback`, `--radius`, `--padding-menu`.
+ *
+ * @example
+ * ```html
+ * <actor-typeahead rows="8">
+ *   <input type="text" placeholder="alice.bsky.social" />
+ * </actor-typeahead>
+ * ```
+ */
 export default class ActorTypeahead extends HTMLElement {
+  /** The default custom element tag name. */
   static tag = "actor-typeahead";
 
+  /** Register this component as a custom element under the given tag name. */
   static define(tag = this.tag): void {
     this.tag = tag;
 
@@ -156,6 +179,7 @@ export default class ActorTypeahead extends HTMLElement {
     return rows;
   }
 
+  /** Routes DOM events to the appropriate internal handler. */
   handleEvent(evt: Event) {
     switch (evt.type) {
       case "input":
