@@ -52,14 +52,21 @@ change.
 Keyboard navigation: Arrow keys, Page Up/Down, Enter to select, Escape to
 dismiss.
 
-## Disabling auto-registration
+## Custom tag name
 
-Pass `?tag=none` in the import URL to prevent auto-registration:
+By default, importing the module automatically registers the component as
+`<actor-typeahead>`. If you want to use a different tag name, or need to extend
+the class before registering, you can disable auto-registration by passing
+`?tag=none` in the import URL:
 
 ```ts
 import { ActorTypeahead } from "@tijs/actor-typeahead?tag=none";
-customElements.define("my-typeahead", ActorTypeahead);
+
+// Register under a custom name
+customElements.define("my-handle-picker", ActorTypeahead);
 ```
+
+You can also pass a custom tag name directly: `?tag=my-handle-picker`.
 
 ## License
 
