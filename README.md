@@ -4,6 +4,13 @@ A Web Component that provides typeahead suggestions for AT Protocol (Bluesky)
 handles. Uses the public `app.bsky.actor.searchActorsTypeahead` API directly
 from the client.
 
+This is a fork of
+[jakelazaroff.com/actor-typeahead](https://tangled.org/jakelazaroff.com/actor-typeahead),
+originally created by [Jake Lazaroff](https://jakelazaroff.com). This fork is
+published to [JSR](https://jsr.io/@tijs/actor-typeahead) as a Deno-native
+package with additional features like configurable tag names and CSS custom
+properties.
+
 ## Usage
 
 ```html
@@ -70,4 +77,5 @@ You can also pass a custom tag name directly: `?tag=my-handle-picker`.
 
 ## License
 
-MIT
+MIT. The original source code by Jake Lazaroff is licensed under
+[MPL-2.0](https://mozilla.org/MPL/2.0/).
