@@ -1,0 +1,17 @@
+{
+  "name": "@tijs/actor-typeahead",
+  "version": "0.1.0",
+  "exports": {
+    ".": "./mod.ts"
+  },
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "deno.ns"]
+  },
+  "tasks": {
+    "quality": "deno fmt --check && deno lint && deno check mod.ts",
+    "fmt": "deno fmt"
+  },
+  "publish": {
+    "include": ["mod.ts", "src/", "README.md", "LICENSE", "deno.json"]
+  }
+}

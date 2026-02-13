@@ -1,0 +1,66 @@
+# actor-typeahead
+
+A Web Component that provides typeahead suggestions for AT Protocol (Bluesky)
+handles. Uses the public `app.bsky.actor.searchActorsTypeahead` API directly
+from the client.
+
+## Usage
+
+```html
+<script type="module" src="https://esm.sh/jsr/@tijs/actor-typeahead"></script>
+
+<actor-typeahead>
+  <input type="text" placeholder="alice.bsky.social" />
+</actor-typeahead>
+```
+
+Or import in JavaScript/TypeScript:
+
+```ts
+import "@tijs/actor-typeahead";
+```
+
+## Attributes
+
+| Attribute | Default                       | Description               |
+| --------- | ----------------------------- | ------------------------- |
+| `host`    | `https://public.api.bsky.app` | API host for actor search |
+| `rows`    | `5`                           | Max suggestions to show   |
+
+## CSS Custom Properties
+
+Style the dropdown via custom properties on `<actor-typeahead>`:
+
+| Property                  | Default   |
+| ------------------------- | --------- |
+| `--color-background`      | `#ffffff` |
+| `--color-border`          | `#e5e7eb` |
+| `--color-shadow`          | `#000000` |
+| `--color-hover`           | `#fff1f1` |
+| `--color-avatar-fallback` | `#fecaca` |
+| `--radius`                | `8px`     |
+| `--padding-menu`          | `4px`     |
+
+## How it works
+
+Wrap any `<input>` element. The component listens for `input` events on the
+slotted input, fetches matching actors, and displays them in a dropdown. When a
+suggestion is selected (via click or keyboard), the input value is set and a
+native `input` event is dispatched so frameworks (React, etc.) can detect the
+change.
+
+Keyboard navigation: Arrow keys, Page Up/Down, Enter to select, Escape to
+dismiss.
+
+## Disabling auto-registration
+
+Pass `?tag=none` in the import URL to prevent auto-registration:
+
+```ts
+import { ActorTypeahead } from "@tijs/actor-typeahead?tag=none";
+customElements.define("my-typeahead", ActorTypeahead);
+```
+
+## License
+
+MIT
