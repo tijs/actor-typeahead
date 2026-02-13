@@ -77,5 +77,4 @@ You can also pass a custom tag name directly: `?tag=my-handle-picker`.
 
 ## License
 
-MIT. The original source code by Jake Lazaroff is licensed under
-[MPL-2.0](https://mozilla.org/MPL/2.0/).
+[MPL-2.0](LICENSE)
