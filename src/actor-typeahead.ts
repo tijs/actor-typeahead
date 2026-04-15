@@ -169,6 +169,7 @@ export default class ActorTypeahead extends HTMLElement {
   #actors: Actor[] = [];
   #index = -1;
   #pressed = false;
+  #selecting = false;
 
   constructor() {
     super();
@@ -251,6 +252,9 @@ export default class ActorTypeahead extends HTMLElement {
   }
 
   async #oninput(evt: InputEvent & { target: HTMLInputElement }) {
+    // Ignore the synthetic input event dispatched after selecting a suggestion
+    if (this.#selecting) return;
+
     const query = evt.target?.value;
     if (!query) {
       this.#actors = [];
@@ -318,12 +322,7 @@ export default class ActorTypeahead extends HTMLElement {
     const input = this.querySelector("input");
     if (!input || !button) return;
 
-    this.#actors = [];
-    this.#index = -1;
-    this.#render();
-    input.value = button.dataset.handle || "";
-    input.dispatchEvent(new Event("input", { bubbles: true }));
-    input.focus();
+    this.#select(input, button.dataset.handle || "");
   }
 
   #onclick(evt: MouseEvent & { target: HTMLElement }) {
@@ -336,11 +335,17 @@ export default class ActorTypeahead extends HTMLElement {
     evt.preventDefault();
     evt.stopPropagation();
 
+    this.#select(input, button.dataset.handle || "");
+  }
+
+  #select(input: HTMLInputElement, handle: string) {
     this.#actors = [];
     this.#index = -1;
     this.#render();
-    input.value = button.dataset.handle || "";
+    input.value = handle;
+    this.#selecting = true;
     input.dispatchEvent(new Event("input", { bubbles: true }));
+    this.#selecting = false;
     input.focus();
   }
 }
